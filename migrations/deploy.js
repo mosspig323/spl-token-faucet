@@ -1,4 +1,4 @@
-const { Program, Provider, Wallet, web3, workspace, BN } = require("@project-serum/anchor");
+const { Program, Provider, Wallet, web3, workspace, BN, setProvider } = require("@project-serum/anchor");
 const { TokenInstructions } = require('@project-serum/serum');
 const { createMint } = require("@project-serum/common")
 
@@ -27,7 +27,7 @@ const createToken = async (provider, program, tokenConfig) => {
 }
 
 module.exports = async function (provider) {
-  anchor.setProvider(provider);
+  setProvider(provider);
 
   const faucetProgram = workspace.Faucet;
   const wallet = provider.wallet;
@@ -49,6 +49,8 @@ module.exports = async function (provider) {
 
   for (const tokenConfig of tokenConfigs) {
     const { tokenOwnerAccount: faucetConfigAccount, splToken, tokenNonce, tokenAuthority } = await createToken(provider, faucetProgram, tokenConfig);
+
+    console.log(tokenConfig.symbol, "faucet_config address: ", faucetConfigAccount.publicKey.toBase58());
 
     await faucetProgram.rpc.initialize(tokenNonce, tokenConfig.dripVolume, {
       accounts: {

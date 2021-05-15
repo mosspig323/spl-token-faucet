@@ -59,13 +59,13 @@ pub struct Drip<'info> {
     #[account()]
     faucet_config: ProgramAccount<'info, FaucetConfig>,
 
-    #[account("token_program.key == &token::ID")]
+    // #[account("token_program.key == &token::ID")]
     token_program: AccountInfo<'info>,
 
-    #[account(mut, "&faucet_config.token_mint == token_mint.key")]
+    // #[account(mut, "&faucet_config.token_mint == token_mint.key")]
     token_mint: AccountInfo<'info>,
 
-    #[account("&faucet_config.token_authority == token_authority.key")]
+    // #[account("&faucet_config.token_authority == token_authority.key")]
     token_authority: AccountInfo<'info>,
 
     #[account(mut)]

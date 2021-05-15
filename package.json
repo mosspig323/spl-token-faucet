@@ -5,7 +5,8 @@
     "test": "anchor test",
     "build": "anchor build",
     "predeploy:devnet": "npm run build",
-    "deploy:devnet": "anchor deploy --url https://api.devnet.solana.com"
+    "deploy:devnet": "anchor deploy --url https://api.devnet.solana.com",
+    "migrate:devnet": "anchor migrate --url https://api.devnet.solana.com"
   },
   "private": true,
   "dependencies": {
